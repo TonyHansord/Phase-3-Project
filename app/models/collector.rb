@@ -8,7 +8,7 @@ class Collector < ActiveRecord::Base
     end
   end
 
-  def add_game(title, console, genre)
-    self.games << Game.create(title: title, console_id: Console.find_by(name: console).id, genre_id: Genre.find_by(name: genre).id)
+  def add_game(title, console_id, genre_id)
+    self.games << Game.create(title: title, console_id: console_id, genre_id: genre_id)
   end
 end
