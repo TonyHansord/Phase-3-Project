@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_21_021142) do
+ActiveRecord::Schema.define(version: 2023_05_28_015453) do
 
   create_table "collectors", force: :cascade do |t|
     t.string "name"
@@ -28,7 +28,6 @@ ActiveRecord::Schema.define(version: 2023_05_21_021142) do
   create_table "consoles", force: :cascade do |t|
     t.string "name"
     t.string "parent"
-    t.string "year_released"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -37,8 +36,7 @@ ActiveRecord::Schema.define(version: 2023_05_21_021142) do
     t.string "title"
     t.integer "console_id"
     t.integer "genre_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.string "year_released"
   end
 
   create_table "genres", force: :cascade do |t|
