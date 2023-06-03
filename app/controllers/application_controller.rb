@@ -27,7 +27,7 @@ class ApplicationController < Sinatra::Base
       collector.games << game
     else
       # if game is not in database - add new game and add it to collection
-      collector.add_game(params[:title], params[:console_id], params[:genre_id])
+      collector.add_game(params[:title], params[:console_id], params[:genre_id], params[:year_released])
     end
     collector.games.to_json
   end
@@ -46,6 +46,7 @@ class ApplicationController < Sinatra::Base
       title: params[:title],
       console_id: params[:console_id],
       genre_id: params[:genre_id],
+      year_released: params[:year_released],
     )
     game.to_json
   end
@@ -59,6 +60,23 @@ class ApplicationController < Sinatra::Base
     collector.to_json
   end
 
+  patch "/games/:id" do
+    game = Game.find(params[:id])
+    if params.has_key?(:title)
+      game.update(title: params[:title])
+    end
+    if params.has_key?(:console_id)
+      game.update(console_id: params[:console_id])
+    end
+    if params.has_key?(:genre_id)
+      game.update(genre_id: params[:genre_id])
+    end
+    if params.has_key?(:year_released)
+      game.update(year_released: params[:year_released])
+    end
+    game.to_json
+  end
+
   # delete collector
   delete "/collectors/:id" do
     collector = Collector.find(params[:id])
@@ -68,6 +86,10 @@ class ApplicationController < Sinatra::Base
 
   delete "/games/:id" do
     game = Game.find(params[:id])
+    game.collectors.each do |collector|
+      collector.remove_from_collection(game)
+    end
+
     game.destroy
     Game.all.to_json
   end
