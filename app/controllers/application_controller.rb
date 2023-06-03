@@ -60,6 +60,7 @@ class ApplicationController < Sinatra::Base
     collector.to_json
   end
 
+  # Update a game
   patch "/games/:id" do
     game = Game.find(params[:id])
     if params.has_key?(:title)
@@ -84,6 +85,7 @@ class ApplicationController < Sinatra::Base
     Collector.all.to_json
   end
 
+  #delete a game from all collections and database
   delete "/games/:id" do
     game = Game.find(params[:id])
     game.collectors.each do |collector|
