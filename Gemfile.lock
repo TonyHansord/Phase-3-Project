@@ -30,6 +30,8 @@ GEM
       coderay (~> 1.1)
       method_source (~> 1.0)
     rack (2.2.7)
+    rack-contrib (2.3.0)
+      rack (~> 2.0)
     rack-protection (2.2.4)
       rack
     rake (13.0.6)
@@ -61,6 +63,7 @@ DEPENDENCIES
   activerecord (~> 6.1)
   faker (~> 2.18)
   pry
+  rack-contrib
   rake
   require_all
   rerun

@@ -21,6 +21,7 @@ class ApplicationController < Sinatra::Base
 
   # Add game to a collection
   post "/collectors/:id/games" do
+    puts params
     collector = Collector.find(params[:id])
     # if game is in database - add to collection
     if game = Game.where(title: params[:title], console_id: params[:console_id]).first
@@ -34,6 +35,7 @@ class ApplicationController < Sinatra::Base
 
   # Create a collector
   post "/collectors" do
+    puts params
     collector = Collector.create(
       name: params[:name],
     )
