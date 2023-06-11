@@ -8,8 +8,13 @@ class ApplicationController < Sinatra::Base
 
   # Get all Games
   get "/games" do
-    game = Game.all
-    game.to_json
+    games = Game.all
+    games.to_json
+  end
+
+  get "/consoles" do
+    consoles = Console.all
+    consoles.to_json
   end
 
   get "/games/:id" do
@@ -21,6 +26,11 @@ class ApplicationController < Sinatra::Base
   get "/collectors/:id/games" do
     collector = Collector.find(params[:id])
     collector.games.to_json
+  end
+
+  get "/collectors/:id/consoles" do
+    collector = Collector.find(params[:id])
+    collector.consoles.uniq.to_json
   end
 
   # Add game to a collection
