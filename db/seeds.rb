@@ -143,8 +143,29 @@ if Console.count == 0
   end
 end
 
+Console.where(id: 1..3).each do |apple| apple.update(parent: "Apple") end
+Console.where(id: 4..12).each do |atari| atari.update(parent: "Atari") end
+Console.find(13).update(parent: "Commodore / Amiga")
+Console.find(14).update(parent: "Neo Geo")
+Console.where(id: 15..27).each do |nint| nint.update(parent: "Nintendo") end
+Console.find(28).update(parent: "PC")
+Console.where(id: 29..35).each do |playstation| playstation.update(parent: "PlayStation") end
+Console.where(id: 36..42).each do |sega| sega.update(parent: "Sega") end
+Console.where(id: 43..46).each do |xbox| xbox.update(parent: "Xbox") end
+
 puts "Seeding Collectors"
 
 tony = Collector.create(name: "Tony")
+mark = Collector.create(name: "Mark")
+cindy = Collector.create(name: "Cindy")
+brad = Collector.create(name: "Brad")
+
+puts "Seeding Games"
+
+tony.games << Game.create(title: "Stealth ATF", console_id: 27, genre_id: 8, year_released: "1990")
+tony.games << Game.create(title: "Donkey Kong Country", console_id: 26, genre_id: 53, year_released: "1994")
+mark.games << Game.create(title: "Manhunt", console_id: 32, genre_id: 70, year_released: "2003")
+tony.games << Game.create(title: "Super Mario 64", console_id: 22, genre_id: 62, year_released: "1996")
+mark.games << Game.last
 
 puts "Done Seeding"

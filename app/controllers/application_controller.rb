@@ -1,6 +1,5 @@
 class ApplicationController < Sinatra::Base
   set :default_content_type, "application/json"
-
   # Get all collectors
   get "/collectors" do
     collectors = Collector.all
