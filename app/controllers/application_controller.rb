@@ -12,6 +12,11 @@ class ApplicationController < Sinatra::Base
     game.to_json
   end
 
+  get "/games/:id" do
+    game = Game.find(params[:id])
+    game.to_json
+  end
+
   # Get all games in a collectors collection
   get "/collectors/:id/games" do
     collector = Collector.find(params[:id])
@@ -84,6 +89,14 @@ class ApplicationController < Sinatra::Base
     collector = Collector.find(params[:id])
     collector.destroy
     Collector.all.to_json
+  end
+
+  # Remove Game From collection
+  delete "/collectors/:id/games/:game_id" do
+    collector = Collector.find(params[:id])
+    game = Game.find(params[:game_id])
+    collector.remove_from_collection(game)
+    collector.games.to_json
   end
 
   #delete a game from all collections and database
